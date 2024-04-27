@@ -30,7 +30,7 @@ export default async function MyAccount() {
               <td className="border-gray-200 border-2 rounded-2xl text-gray-800 text-2xl font-medium text-center px-5 py-2">Male</td>
             </tr>
             <tr>
-              <td className="font-semibold pl-8 rounded-lg text-left text-2xl font-medium">Blode Type : </td>
+              <td className="font-semibold pl-8 rounded-lg text-left text-2xl font-medium">Blood Type : </td>
               <td className="border-gray-200 border-2 rounded-2xl text-gray-800 text-2xl font-medium text-center px-5 py-2">A</td>
             </tr>
             <tr>

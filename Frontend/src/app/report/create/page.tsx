@@ -3,12 +3,23 @@
 import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+<<<<<<< HEAD
 import { useSearchParams } from "next/navigation";
 import createReport from "@/libs/createReport";
+=======
+import { useSearchParams, useRouter } from "next/navigation";
+import  createReport  from "@/libs/createReport";
+>>>>>>> edb10ad6e652166c9333d2be7d3a9b421ad1f737
 import getAppointment from "@/libs/getAppointment";
+import { sweetAlert } from "@/components/alert";
 
 export default function addReport() {
+<<<<<<< HEAD
   const searchParams = useSearchParams();
+=======
+    const searchParams = useSearchParams();
+    const router = useRouter();
+>>>>>>> edb10ad6e652166c9333d2be7d3a9b421ad1f737
 
   const { data: session } = useSession();
   const token = session?.user.token;
@@ -27,6 +38,7 @@ export default function addReport() {
 
   let appt = searchParams.get("apptId");
 
+<<<<<<< HEAD
   useEffect(() => {
     const fetchAppointment = async () => {
       if (!appt) return;
@@ -61,6 +73,43 @@ export default function addReport() {
       alert("Create Report failed");
     }
   };
+=======
+    const makingReport = async () => {
+        if (!treatment) {
+          sweetAlert("Incomplete", "Please enter treatment", "warning");
+          return
+        }
+        if (!medication) {
+          sweetAlert("Incomplete", "Please enter medication", "warning");
+          return
+        }
+        if (!recommendation) {
+          sweetAlert("Incomplete", "Please enter recommendation", "warning");
+          return
+        }
+        if (!patient || !dentist || !appointmentDate || !appt) {
+          sweetAlert("Incomplete", "Please select appointment again", "warning");
+          router.push("/schedule");
+          return
+        }
+        const report = await createReport(
+            patient,
+            dentist,
+            appt,
+            appointmentDate,
+            treatment,
+            medication,
+            recommendation,
+            token
+        );
+        if (report) {
+          sweetAlert("Successfully", "Create report successfully", "success");
+          router.push("/appointment");
+        } else {
+          sweetAlert("Failed", "Create report failed", "error");
+        }
+      };
+>>>>>>> edb10ad6e652166c9333d2be7d3a9b421ad1f737
 
   return (
     <main className="justify-center items-center p-5 flex flex-col">

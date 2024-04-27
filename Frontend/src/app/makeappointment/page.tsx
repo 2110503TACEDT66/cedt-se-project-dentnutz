@@ -16,11 +16,16 @@ export default function AppointmentMaking() {
   const token = session?.user.token;
   if (!token) return null;
 
+<<<<<<< HEAD
   if (
     session.user.type === "dentist" ||
     (session.user.type !== "dentist" && session.user.type !== "patient")
   ) {
     router.push("/");
+=======
+  if ((session.user.type === 'dentist') || (session.user.role==="admin")){
+    router.push('/');
+>>>>>>> edb10ad6e652166c9333d2be7d3a9b421ad1f737
   }
   const [appointmentDate, setAppointmentDate] = useState<Dayjs | null>(null);
   const [appointmentTime, setAppointmentTime] = useState<Dayjs | null>(null);
@@ -32,6 +37,7 @@ export default function AppointmentMaking() {
 
   if (appointmentDate && appointmentTime) {
     const timeString =
+<<<<<<< HEAD
       appointmentDate && appointmentTime
         ? dayjs(
             `${appointmentDate.format("YYYY-MM-DD")}T${appointmentTime.format(
@@ -40,6 +46,16 @@ export default function AppointmentMaking() {
           )
         : null;
     appDate = dayjs(timeString).format("YYYY-MM-DD HH:mm:ss Z");
+=======
+    appointmentDate && appointmentTime
+            ? dayjs(
+                    `${appointmentDate.format(
+                        "YYYY-MM-DD"
+                    )}T${appointmentTime.format("HH:mm")}`
+                )
+            : null;
+    appDate = dayjs(timeString).format('YYYY-MM-DD HH:mm:ss Z');
+>>>>>>> edb10ad6e652166c9333d2be7d3a9b421ad1f737
   }
 
   //   function onTimeChange(value: number | null) {
@@ -63,11 +79,28 @@ export default function AppointmentMaking() {
   // }
 
   const makingAppointment = async () => {
+<<<<<<< HEAD
     if (!appDate && !dentistID) {
       sweetAlert(
         "Incomplete",
         "Please select dentist and date/time for appointment",
         "warning"
+=======
+    if (!dentistID) {
+      sweetAlert("Incomplete", "Please select dentist", "warning");
+      return
+    }
+    if (!appDate) {
+      sweetAlert("Incomplete", "Please select date for appointment", "warning");
+      return
+    }
+    try {
+      const appointment = await addAppointment(
+        dentistID,
+        appDate,
+        token
+        
+>>>>>>> edb10ad6e652166c9333d2be7d3a9b421ad1f737
       );
       return;
     }
@@ -87,18 +120,36 @@ export default function AppointmentMaking() {
       const appointment = await addAppointment(dentistID, appDate, token);
 
       if (appointment) {
+<<<<<<< HEAD
         sweetAlert(
           "Successfully",
           "Appointment booked successfully",
           "success"
         );
+=======
+        sweetAlert("Successfully", "Appointment booked successfully", "success");
+>>>>>>> edb10ad6e652166c9333d2be7d3a9b421ad1f737
         router.push("/appointment");
       } else {
         sweetAlert("Failed", "Appointment booking failed", "error");
       }
     } catch (error) {
+<<<<<<< HEAD
       sweetAlert("Failed", "Cannot book more than 1 appointment", "error");
       router.push("/appointment");
+=======
+      const err =  error as Error;
+      if(err.message === "Appointment date and dentist already exists") {
+        sweetAlert("Failed", "Appointment date and dentist already exists", "error");
+      } else if(err.message === "Cannot book more than 1 appointment") {
+        sweetAlert("Failed", "Cannot book more than 1 appointment", "error");
+      }
+      else{
+        //console.log(appointmentDate, appointmentTime, dentistID, appDate )
+        sweetAlert("Failed", "Failed to add appointment", "error");
+      }
+      //console.log(error)
+>>>>>>> edb10ad6e652166c9333d2be7d3a9b421ad1f737
     }
   };
 

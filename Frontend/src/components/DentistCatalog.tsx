@@ -7,17 +7,20 @@ export default async function DentistCatalog({dentistsJson} : {dentistsJson: Pro
     const dentistsJsonReady = await dentistsJson
 
     return (
-            <div className=" rounded-2xl border-2 border-gray-300 pt-10 m-5 flex flex-wrap justify-center"  >
+
+        <div className="container mx-auto">
+            <div className="flex flex-wrap justify-left"  >
                 {
                     dentistsJsonReady.data.map( (dentistItem) => (
                    
-                    <Link href={`/dentist/${dentistItem._id}`} className="mx-20 mb-20 mt-10">
+                    <Link href={`/dentist/${dentistItem._id}`} className="ml-10 mx-5 mb-10 mt-10 transition ease-in-out hover:scale-105">
                         <Card key={dentistItem._id} dentistName={dentistItem.name} imgSrc={dentistItem.picture}
                          areaOfExpertise ={dentistItem.areaOfExpertise} yearsOfExperience={dentistItem.yearsOfExperience} />
                     </Link>
-)
                     )
+                )
                 }
             </div>
+        </div>
     )
 }

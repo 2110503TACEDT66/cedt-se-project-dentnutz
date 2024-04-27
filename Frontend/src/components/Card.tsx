@@ -12,17 +12,16 @@ export default  function Card({dentistName , imgSrc, onRating  , yearsOfExperien
     
     return (
         <InteractiveCard contentName={dentistName}>
-                <div className='w-full h-[70%] relative rounded-lg'>
+                <div className='w-full h-[70%] relative rounded-2xl'>
                     <Image src={imgSrc}
                     alt='Hospital picture'
                     fill={true}
-                    className='object-cover rounded-t-lg'
+                    className='object-cover rounded-t-2xl'
                     /> 
                 </div>
-                <div className="text-xl text-slate-800 mt-5 text-left ml-8 font-medium">Doctor {dentistName}</div>
-                <div className="text-xl text-slate-800 mt-5 text-left ml-8 font-medium">Experience : {yearsOfExperience} Years</div>
-                <div className="text-xl text-slate-800 mt-5 text-left ml-8 font-medium">Expertise of : {areaOfExpertise}</div>
-                
+                <div className="text-2xl text-slate-800 mt-3 font-semibold text-center">Doctor {dentistName}</div>
+                <div className="text-xl  text-slate-800 mt-3 ml-5 font-medium text-left">Experience : {yearsOfExperience} Years</div>
+                <div className="text-xl  text-slate-800 mt-3 ml-5 font-medium text-left">Expertise of : {areaOfExpertise}</div>
         </InteractiveCard>
     )
 }

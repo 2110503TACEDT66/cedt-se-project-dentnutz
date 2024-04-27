@@ -10,7 +10,13 @@ export default async function addAppointment(dentistID:string, appDate:string , 
         body: JSON.stringify({appDate: appDate})
     })
 
-    if (!response.ok) {
+    if (response.status == 400) {
+        throw new Error("Cannot book more than 1 appointment")
+    }
+    else if (response.status == 404) {
+        throw new Error("Appointment date and dentist already exists")
+    }
+    else if(!response.ok){
         throw new Error("Failed to add appointment")
     }
 

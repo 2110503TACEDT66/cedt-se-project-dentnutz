@@ -2,6 +2,7 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+<<<<<<< HEAD
 import {
   Select,
   MenuItem,
@@ -9,6 +10,9 @@ import {
   InputLabel,
   LinearProgress,
 } from "@mui/material";
+=======
+import { Select, MenuItem, FormControl, InputLabel, CircularProgress } from "@mui/material";
+>>>>>>> edb10ad6e652166c9333d2be7d3a9b421ad1f737
 import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/en";
@@ -57,6 +61,7 @@ export default function DateReserve({
     setComponentDate(dayjs(timeString));
   }
 
+<<<<<<< HEAD
   useEffect(() => {
     const fetchData = async () => {
       const dentist = await getDentists();
@@ -64,6 +69,12 @@ export default function DateReserve({
     };
     fetchData();
   }, []);
+=======
+    // if (!allDentist) return null;
+
+    if (!allDentist) return (
+        <CircularProgress />);
+>>>>>>> edb10ad6e652166c9333d2be7d3a9b421ad1f737
 
   // if (!allDentist) return null;
   if (!allDentist)

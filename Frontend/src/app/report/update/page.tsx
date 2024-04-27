@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import updateReport from "@/libs/updateReport";
 import getReport from "@/libs/getReport";
 import { useSearchParams } from "next/navigation";
+import Input from "@mui/material";
+import { sweetAlert } from "@/components/alert";
 
 export default function updateReportPage() {
 
@@ -34,7 +36,22 @@ export default function updateReportPage() {
       },[]);
 
     const editReport = async () => {
-        if (!treatment || !recommendation || !medication || !reportID) return alert("Please enter all fields");
+        if (!treatment) {
+          sweetAlert("Incomplete", "Please enter treatment", "warning");
+          return
+        }
+        if (!medication) {
+          sweetAlert("Incomplete", "Please enter medication", "warning");
+          return
+        }
+        if (!recommendation) {
+          sweetAlert("Incomplete", "Please enter recommendation", "warning");
+          return
+        }
+        if (!reportID) {
+          sweetAlert("Incomplete", "Please select report again", "error");
+          return
+        }
         const report = await updateReport(
             treatment,
             medication,
@@ -43,42 +60,39 @@ export default function updateReportPage() {
             token
         );
         if (report) {
-          alert("Update Report successfully");
+          sweetAlert("Successfully", "Update report successfully", "success");
         } else {
-          alert("Update Report failed");
+          sweetAlert("Failed", "Update report failed", "error");
         }
       };
 
   
   return (
     <main className="justify-center items-center p-5 flex flex-col">
-        <h1 className="mx-auto w-fit text-2xl mb-10 bold text-black">Update Report</h1>
-        <div className="shadow-lg rounded-lg w-4/5 flex flex-col justify-items-center content-center p-5 space-y-2">
-            
-            
+        <h1 className="text-center font-semibold text-4xl mb-10 mt-8">Update Report</h1>
+        <div className="border-gray-200 border-2 rounded-2xl w-4/5 flex flex-col justify-items-center content-center p-5 space-y-2"> 
             <div className="flex flex-row ">
-                <div className="text-xl basis-1/4 text-black">Treatment:</div>
-                <TextField multiline className="basis-3/4" id="outlined-basic" label="Treatment" variant="outlined" 
+                <div className="font-semibold pl-8 rounded-lg text-left text-2xl font-medium">Treatment:</div>
+                <TextField multiline className="basis-3/5" id="outlined-basic" label="Treatment" variant="outlined" 
                 onChange={(e)=>{setTreatment(e.target.value)}}
                 value={treatment}/>
             </div>
             <div className="flex flex-row ">
-                <div className="text-xl basis-1/4 text-black">Medication:</div>
-                <TextField multiline className="basis-3/4" id="outlined-basic" label="Medication" variant="outlined" 
+                <div className="font-semibold pl-8 rounded-lg text-left text-2xl font-medium ">Medication:</div>
+                <TextField multiline className="basis-3/5" id="outlined-basic" label="Medication" variant="outlined" 
                 onChange={(e)=>{setMedication(e.target.value)}}
                 value={medication}/>
             </div>
-            <div className="flex flex-row ">
-                <div className="text-xl basis-1/4 text-black">Recommmendation:</div>
-                <TextField multiline className="basis-3/4" id="outlined-basic" label="Recommmendation" variant="outlined" 
+            <div className="flex flex-row">
+                <div className="font-semibold pl-8 rounded-lg text-left text-2xl font-medium">Recommmendation : </div>
+                <TextField multiline className="basis-3/5 " id="outlined-basic" label="Recommmendation" variant="outlined" 
                 onChange={(e)=>{setRecommendation(e.target.value)}}
                 value={recommendation}/>
             </div>
+            <button className="block bg-orange-400 rounded-full hover:bg-orange-300 text-white font-semibold px-5 py-3 shadow-xl text-white mx-auto text-2xl"onClick={editReport}>Confirm Details</button>
 
-            <button className="relative border-2 border-gray-800 bg-transparent py-2.5 px-5 font-medium uppercase text-gray-800 transition-colors before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-full before:origin-top-left before:scale-x-0 before:bg-gray-800 before:transition-transform before:duration-300 before:content-[''] hover:text-white before:hover:scale-x-100"
-                onClick={editReport}
-            >Submit</button>
         </div>
-    </main>
+</main>
+
   );
 }

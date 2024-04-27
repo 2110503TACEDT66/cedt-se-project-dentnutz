@@ -115,12 +115,23 @@ exports.addAppointment = async (req, res, next) => {
     req.body.userName = req.user.name;
     //Check for existed appointment
     const existedAppointments = await Appointment.find({ user: req.user.id });
+    const existedAppointmentsForDentist = await Appointment.findOne({ 
+      dentist: req.params.dentistId ,
+      appDate: req.body.appDate
+    });
 
     //If the user is not an admin , htey can only create 1 appointment
     if (existedAppointments.length >= 1 && req.user.role !== "admin") {
       return res.status(400).json({
         success: false,
         message: `The user with id ${req.user.id} has already made 1 appointments`,
+      });
+    }
+
+    if (existedAppointmentsForDentist) {
+      return res.status(404).json({
+        success: false,
+        message: `The dentist with id ${req.params.dentistId} has already an appointment at ${req.body.appDate}`,
       });
     }
 

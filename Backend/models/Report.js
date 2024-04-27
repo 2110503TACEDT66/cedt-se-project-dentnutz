@@ -12,6 +12,11 @@ const ReportSchema = new mongoose.Schema({
     required: true,
     ref: 'Dentist'
   },
+  appointmentId: {
+    type: mongoose.Schema.ObjectId,
+    required: true,
+    ref: 'Appointment'
+  },
   treatment: {
     type: String,
     required: true,

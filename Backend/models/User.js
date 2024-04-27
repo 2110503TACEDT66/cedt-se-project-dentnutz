@@ -22,7 +22,7 @@ const UserSchema=  new mongoose.Schema({
     userType:{
         type: String,
         enum: ['patient', 'dentist'],
-        default:'patient '
+        default:'patient'
     },
     password:{ 
         type:String, 

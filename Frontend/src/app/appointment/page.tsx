@@ -14,7 +14,7 @@ export default async function MyAppointment() {
 
   return (
     <main className="justify-center items-center p-5">
-      <h1 className="text-5xl font-medium w-fit  text-black bg rounded-lg m-3 py-6 px-10 mx-auto bg-bule-300" >Patient Appointments</h1>
+      <h1 className="text-5xl font-medium w-fit  text-black bg rounded-lg m-3 py-6 px-10 mx-auto bg-bule-300" >Appointments</h1>
       <Suspense fallback={<div>
         <p className="mt-20 mb-5 text-black text-center text-5xl text-bold space-y-6">Loading... </p>
         <div className="mb-20"><LinearProgress/></div>
