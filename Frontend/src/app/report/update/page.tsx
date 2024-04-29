@@ -53,7 +53,7 @@ export default function updateReportPage() {
   
   return (
 <main className="flex justify-center items-center p-10 flex-col mb-10 ">
-    <h1 className="mx-auto w-fit text-2xl mb-10 font-bold text-black mt-7 ">Update Report</h1>
+    <h1 className="mx-auto w-fit text-4xl mb-10 font-bold text-black mt-7 ">Update Report</h1>
     <div className="shadow-lg rounded-lg w-4/5 flex flex-col p-5 space-y-7 text-center  ">
         <div className="items-center ">
             <div className="w-1/4 text-black text-s ml-10  mb-1">Treatment</div>
@@ -64,7 +64,7 @@ export default function updateReportPage() {
         </div>
         <div className=" items-center ">
             <div className="w-1/4 text-black text-s ml-10  mb-1">Medication</div>
-            <input type="text" className="rounded-xl text-black outline-2 border border-gray-300 hover:border-gray-500 focus:border-bule-500 focus:outline-none focus:ring-2 
+            <input type="text" className="rounded-2xl text-black outline-2 border border-gray-300 hover:border-gray-500 focus:border-bule-500 focus:outline-none focus:ring-2 
             focus:ring-blue-500 focus:ring-opacity-70 w-3/4 p-3"
             onChange={(e) => {setMedication(e.target.value)}}  value={medication}/>
             
